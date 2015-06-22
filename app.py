@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, flash, redirect
 
-from flask.ext.wtf import Form, TextField, Optional
+from flask.ext.wtf import Form
+from wtforms.fields import TextField
+from wtforms.validators import Optional
 
 SECRET_KEY = "asdfhjgfdsyuhgfcxdsrethgf"
 DEBUG = True
@@ -14,11 +16,11 @@ book.config.from_object(__name__)
 @book.route('/book/new', methods=['GET', 'POST'])
 def customers_new():
     form = BookNewForm()
-    print form.errors
+    print(form.errors)
     if form.is_submitted():
-        print "submitted"
+        print("submitted")
     if form.validate():
-        print "valid"
+        print("valid")
     if form.validate_on_submit():
         flash("Successfully created a new book")
         return redirect(url_for('.books_show'))
@@ -27,11 +29,11 @@ def customers_new():
 @book.route('/book/new_no_csrf', methods=['GET', 'POST'])
 def customers_new_no_csrf():
     form = BookNewForm(csrf_enabled=False)
-    print form.errors
+    print(form.errors)
     if form.is_submitted():
-        print "submitted"
+        print("submitted")
     if form.validate():
-        print "valid"
+        print("valid")
     if form.validate_on_submit():
         flash("Successfully created a new book")
         return redirect(url_for('.books_show'))
